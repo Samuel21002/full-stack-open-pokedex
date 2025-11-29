@@ -10,19 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Say hello
-        run: |
-          echo "Hello World!"
+        run: echo "Hello World!"
 
-  show_datetime_and_ls:
-    runs-on: ubuntu-latest
-    steps:
       - name: Now it is
-        run: |
-          date
-          
-  directory_content:
-    runs-on: ubuntu-latest
-    steps:
+        run: date
+
       - name: Directory Content
-        run: |
-          ls
+        run: ls

@@ -43,6 +43,7 @@ jobs:
           status: ${{ job.status }}
           title: "Build Pipeline"
           description: ${{ job.status == 'success' && 'Prerequisites succeeded' || 'Build failed! Check the details below to identify the problematic commit.' }}
+          url: ${{ job.status != 'success' && github.event.head_commit.url || '' }}
           username: GitHub Actions
     
   tag_release:

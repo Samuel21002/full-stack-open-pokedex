@@ -41,8 +41,8 @@ jobs:
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
           severity: ${{ job.status == 'success' && 'info' || 'error' }}
-          details: ${{ job.status == 'success' && 'All tests passed!' || 'Build failed!' }}
-          description: ${{ job.status == 'success' && '✅ Success' || format('❌ Failure - Commit: {0} by {1}', github.sha, github.actor) }}
+          details: ${{ job.status == 'success' && 'All prerequisites passed!' || 'Build failed!' }}
+          description: ${{ job.status == 'success' && '✅ Success' || '❌ Failure - Commit: ${{github.sha}} by ${{github.actor}}' }}
           username: GitHub Actions
     
   tag_release:

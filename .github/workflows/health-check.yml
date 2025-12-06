@@ -2,8 +2,8 @@ name: Scheduled Health Check
 
 on:
   schedule:
-    # Runs every 1 minute
-    - cron: '*/1 * * * *'
+    # Runs once a month (1st day of each month at midnight)
+    - cron: '0 0 1 * *'
   workflow_dispatch: # Allows manual triggering for testing
   workflow_run:
     workflows: ["Deployment pipeline"]

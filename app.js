@@ -10,7 +10,7 @@ app.get('/version', (req, res) => {
   res.send('1') // change this string to ensure a new version deployed
 })
 app.get('/health', (req, res) => {
-  res.send('failed').status(500)
+  res.status(500).send('failed')
   throw new Error('fail health check') // uncomment to simulate a failed health check
 })
 app.listen(PORT, () => {

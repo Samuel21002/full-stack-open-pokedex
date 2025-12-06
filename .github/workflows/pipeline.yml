@@ -35,6 +35,15 @@ jobs:
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && env.SKIP_DEPLOYMENT != 'true' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_KEY }}
+      - name: Build Status Notification
+        uses: rjstone/discord-webhook-notify@c2597273488aeda841dd1e891321952b51f7996f
+        if: always()
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          severity: ${{ job.status == 'success' && 'info' || 'error' }}
+          details: ${{ job.status == 'success' && 'All tests passed!' || format('Build failed!{0}Commit: {1}{0}Author: {2}{0}Message: {3}{0}Workflow: {4}', '\n', github.sha, github.actor, github.event.head_commit.message, github.server_url, '/', github.repository, '/actions/runs/', github.run_id) }}
+          description: ${{ job.status == 'success' && '✅ Success' || '❌ Failure' }}
+          username: GitHub Actions
     
   tag_release:
     needs: [simple_deployment_pipeline]

@@ -41,7 +41,7 @@ jobs:
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
           severity: ${{ job.status == 'success' && 'info' || 'error' }}
-          details: ${{ job.status == 'success' && 'All tests passed!' || format('Build failed!{0}Commit: {1}{0}Author: {2}{0}Message: {3}{0}Workflow: {4}', '\n', github.sha, github.actor, github.event.head_commit.message, github.server_url, '/', github.repository, '/actions/runs/', github.run_id) }}
+          details: ${{ job.status == 'success' && 'All tests passed!' || format('Build failed!\nCommit: {0}\nAuthor: {1}\nMessage: {2}\nWorkflow: {3}/{4}/actions/runs/{5}', github.sha, github.actor, github.event.head_commit.message, github.server_url, github.repository, github.run_id) }}
           description: ${{ job.status == 'success' && '✅ Success' || '❌ Failure' }}
           username: GitHub Actions
     

@@ -39,9 +39,10 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         if: always()
         with:
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          severity: ${{ job.status == 'success' && 'info' || 'error' }}
-          details: ${{ job.status == 'success' && 'All prerequisites passed!' || 'Build failed!' }}
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          status: ${{ job.status }}
+          title: "Build Pipeline"
+          description: ${{ job.status == 'success' && 'Prerequisites succeeded' || 'Build failed! Check the details below to identify the problematic commit.' }}
           username: GitHub Actions
     
   tag_release:
